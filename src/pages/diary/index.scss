@@ -1,0 +1,31 @@
+.diary-container {
+  padding: 54px 24px;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.5);
+  background-color: #fff;
+  max-width: 1360px;
+  height: calc(100vh - 68px);
+  margin: 0 auto 20px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  .diary-title,
+  .diary-time {
+    font-size: 32px;
+    line-height: normal;
+    letter-spacing: 1.39px;
+    color: #000;
+    height: 45px;
+  }
+
+  .diary-content {
+    margin: 34px 0 0;
+    font-size: 28px;
+    font-weight: 300;
+    letter-spacing: 0.32px;
+    color: #1b1b1b;
+    flex: auto;
+    overflow-y: scroll;
+    white-space: pre-wrap;
+  }
+}

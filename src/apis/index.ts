@@ -1,10 +1,26 @@
-import { IUserInfo } from '../models'
+import { IPost, IUserInfo } from '../models'
 
 const API_HOST = 'https://lanhanghui-845ff7.postdemo.tcn.asia'
 const fetch = window.fetch
 
 const handleLogout = () => {
   location.href = '/login'
+}
+
+const handleAuthResponse = (res: any) => {
+  if (res?.token) {
+    return {
+      token: res.token as string,
+    }
+  }
+
+  if (res?.error) {
+    return {
+      error: res.error as string,
+    }
+  }
+
+  return null
 }
 
 const get = async (url: string) => {
@@ -53,13 +69,53 @@ const getUserInfo = async () => {
 
 const login = async (data: { email: string; password: string }) => {
   const res = await post(`${API_HOST}/api/v2/auth/login`, data)
-  if (res?.token) {
-    return res
+  return handleAuthResponse(res)
+}
+
+const register = async (data: {
+  email: string
+  password: string
+  name: string
+}) => {
+  const res = await post(`${API_HOST}/api/v2/auth/register`, data)
+  return handleAuthResponse(res)
+}
+
+const getMyPosts = async (page: number, count: number) => {
+  const res = await get(
+    `${API_HOST}/api/v2/users/me/posts?page=${page}&count=${count}`
+  )
+  if (Array.isArray(res)) {
+    return res as Array<IPost>
+  } else {
+    return []
   }
-  return null
+}
+
+const getPostById = async (id: string) => {
+  const res = await get(`${API_HOST}/api/v2/posts/${id}`)
+
+  if (res?.id) {
+    return res as IPost
+  } else {
+    return null
+  }
+}
+
+const createPost = async (data: { title: string; content: string }) => {
+  const res = await post(`${API_HOST}/api/v2/posts`, data)
+  if (res?.id) {
+    return res as IPost
+  } else {
+    return null
+  }
 }
 
 export default {
   getUserInfo,
   login,
+  register,
+  getMyPosts,
+  getPostById,
+  createPost,
 }

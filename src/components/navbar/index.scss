@@ -1,7 +1,32 @@
-.nav-wrapper {
-  height: 48px;
-}
-
 nav {
   background-color: #fff;
+  height: 48px;
+  position: relative;
+
+  .nav-wrapper {
+    position: absolute;
+    width: calc(100% - 48px);
+    height: 48px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+  }
+
+  .nav-link-button {
+    font-size: 14px;
+    text-align: right;
+    color: #42495e;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  .user-name {
+    font-size: 14px;
+    color: #42495e;
+  }
+
+  .nav-bar-title {
+    font-size: 24px;
+    font-weight: 300;
+    text-align: center;
+    color: #42495e;
+  }
 }
